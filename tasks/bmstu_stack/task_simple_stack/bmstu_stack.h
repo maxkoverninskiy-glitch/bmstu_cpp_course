@@ -45,12 +45,15 @@ class stack
 	}
 
 	void push(T&& value)
-	{
+	{	
+		std::cout << "push1\n";
 		T* new_data = (T*)(operator new(sizeof(T) * (size_ + 1)));
 		for (size_t i = 0; i < size_; ++i)
 		{
 			new (&new_data[i]) T(std::move(data_[i]));
+			std::cout << "before delete\n";
 			data_[i].~T();
+			std::cout << "after delete\n";
 		}
 		new (&new_data[size_]) T(std::forward<T>(value));
 		operator delete(data_);
@@ -72,6 +75,7 @@ class stack
 
 	void push(const T& value)
 	{
+		std::cout << "push2\n";
 		T* new_data = (T*)(operator new(sizeof(T) * (size_ + 1)));
 		for (size_t i = 0; i < size_; ++i)
 		{
@@ -84,6 +88,7 @@ class stack
 		data_ = new_data;
 		++size_;
 	}
+
 
 	void pop()
 	{
@@ -113,4 +118,4 @@ class stack
 		return data_[size_ - 1];
 	}
 };
-}  // namespace bmstu
+}  // namespace bmstu 1
