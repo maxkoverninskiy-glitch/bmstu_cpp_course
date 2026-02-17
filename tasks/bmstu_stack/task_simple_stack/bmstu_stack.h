@@ -45,7 +45,7 @@ class stack
 	}
 
 	void push(T&& value)
-	{	
+	{
 		std::cout << "push1\n";
 		T* new_data = (T*)(operator new(sizeof(T) * (size_ + 1)));
 		for (size_t i = 0; i < size_; ++i)
@@ -89,7 +89,6 @@ class stack
 		++size_;
 	}
 
-
 	void pop()
 	{
 		if (empty())
@@ -118,4 +117,4 @@ class stack
 		return data_[size_ - 1];
 	}
 };
-}  // namespace bmstu 1
+}  // namespace bmstu
