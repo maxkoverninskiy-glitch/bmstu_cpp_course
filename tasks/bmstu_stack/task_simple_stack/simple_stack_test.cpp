@@ -422,12 +422,12 @@ struct transformer
 };
 int transformer::count = 0;
 
-//using my_hard_type = int;
+// using my_hard_type = int;
 
-//my_hard_type func(my_hard_type a)
+// my_hard_type func(my_hard_type a)
 //{
 //	return a * 2;
-//}
+// }
 TEST(Stack, Transformers)
 {
 	transformer tr = {5};
@@ -441,7 +441,7 @@ TEST(Stack, Transformers)
 	st.push({666});
 	std::cout << "end of func\n";
 
-	//my_hard_type a = 5;
-	//func(a);  /// a - lvalue
-	//my_hard_type(std::move(a));
+	// my_hard_type a = 5;
+	// func(a);  /// a - lvalue
+	// my_hard_type(std::move(a));
 }
