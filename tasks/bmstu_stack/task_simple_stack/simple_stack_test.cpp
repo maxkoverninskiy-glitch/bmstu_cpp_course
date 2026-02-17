@@ -212,50 +212,56 @@ TEST(StackTest, ClearAndReuse)
 	ASSERT_EQ(s.size(), 2u);
 	ASSERT_EQ(s.top(), 40);
 }
-TEST (Stack, String){
-	char *astr = "hab";
-	char *bstr = "ner";
+TEST(Stack, String)
+{
+	char* astr = "hab";
+	char* bstr = "ner";
 	int cnt = 0;
 	int i = 0;
-	while (astr[i++] != '\0'){
+	while (astr[i++] != '\0')
+	{
 		cnt++;
 	}
 	i = 0;
-	while (bstr[i++] != '\0'){
+	while (bstr[i++] != '\0')
+	{
 		cnt++;
 	}
-	char *result = (char *)operator new(cnt + 1);
+	char* result = (char*)operator new(cnt + 1);
 	cnt = 0;
 	i = 0;
-	while (astr[i] != '\0'){
+	while (astr[i] != '\0')
+	{
 		result[cnt++] = astr[i++];
 	}
 	i = 0;
-	while (bstr[i] != '\0'){
+	while (bstr[i] != '\0')
+	{
 		result[cnt++] = bstr[i++];
 	}
 	result[cnt] = '\0';
 	std::cout << result;
 	ASSERT_EQ((std::string)result, "habner");
-
 }
-TEST (Stack, String1){
+TEST(Stack, String1)
+{
 	char str[] = "0123456789";
 	int len = 0;
-	while (str[len] != '\0'){
+	while (str[len] != '\0')
+	{
 		len++;
 	};
 	std::cout << len;
 	int i = len - 1;
-	char *result = (char *)operator new(len + 1);
-	while (i >= 0){
+	char* result = (char*)operator new(len + 1);
+	while (i >= 0)
+	{
 		result[len - i - 1] = str[i];
 		i--;
 	}
 	result[len] = '\0';
 	std::cout << result;
 	ASSERT_EQ((std::string)result, "9876543210");
-	
 }
 
 TEST(StackTest, MultipleOperations)
@@ -297,16 +303,19 @@ TEST(StackTest, StringStack)
 	{
 		bmstu::stack<char> s;
 		int cnt = 0;
-		for (char ch: str){
-			if (ch == '('){
+		for (char ch : str)
+		{
+			if (ch == '(')
+			{
 				s.push(ch);
 			}
-			else if (ch == ')'){
-				if (!s.empty()){
+			else if (ch == ')')
+			{
+				if (!s.empty())
+				{
 					cnt++;
 					s.pop();
 				}
-	
 			}
 		}
 		return cnt;
@@ -364,7 +373,6 @@ TEST(StackTest, OptimizationCheck)
 	ASSERT_EQ(CountCopyMoveDefault::assignment_move_count, 0);
 }
 
-
 TEST(StackTest, CheckBraceSequence)
 {
 	auto checkBraceSequence = [](const std::string& str)
@@ -396,16 +404,16 @@ TEST(StackTest, CheckBraceSequence)
 	ASSERT_FALSE(checkBraceSequence(")("));
 };
 
-
-struct transformer {
-	transformer(int number1) 
+struct transformer
+{
+	transformer(int number1)
 	{
 		++count;
 		number = number1;
 		std::cout << "I am Construct " << number << "[" << count << "]\n";
-	
 	}
-	~transformer() {
+	~transformer()
+	{
 		std::cout << "I am DeConstruct " << number << "[" << count << "]\n";
 		--count;
 	}
@@ -414,15 +422,16 @@ struct transformer {
 };
 int transformer::count = 0;
 
-	using my_hard_type = int;
+using my_hard_type = int;
 
-	my_hard_type func(my_hard_type a) {
+my_hard_type func(my_hard_type a)
+{
 	return a * 2;
 }
 TEST(Stack, Transformers)
 {
 	transformer tr = {5};
-	transformer &tr1 = tr;
+	transformer& tr1 = tr;
 	tr.number = 6;
 	std::cout << "tr.number = " << tr.number << "\n";
 	std::cout << "tr1.number = " << tr1.number << "\n";
@@ -432,10 +441,7 @@ TEST(Stack, Transformers)
 	st.push({666});
 	std::cout << "end of func\n";
 
-
-
 	my_hard_type a = 5;
-	func(a); /// a - lvalue
+	func(a);  /// a - lvalue
 	my_hard_type(std::move(a));
-
 }
